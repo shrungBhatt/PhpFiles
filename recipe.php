@@ -3,7 +3,7 @@ require "conn.php";
 
 $ingredient = "Bananas,Apple,Grapes";//$_POST["ingredient"];
 
-$mysql_qry = "SELECT * FROM recpie_data WHERE ingredient LIKE '$ingredient';";
+$mysql_qry = "SELECT * FROM recipe_data WHERE ingredient LIKE '%$ingredient%';";
 
 $dataArray = array();
 $result = mysqli_query($conn, $mysql_qry);
