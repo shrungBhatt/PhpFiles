@@ -3,16 +3,25 @@ require "conn.php";
 
 $ingredient = "Bananas,Apple,Grapes";//$_POST["ingredient"];
 
-$mysql_qry = "SELECT * FROM recipe_data WHERE ingredient LIKE '%$ingredient%';";
+$ingredientsArray = explode(',',$ingredient);
 
-$dataArray = array();
-$result = mysqli_query($conn, $mysql_qry);
+print_r($ingredientsArray);
 
-$index = 0;
-while($row = mysqli_fetch_assoc($result)){ // loop to store the data in an associative array.
-     $dataArray[$index] = $row;
-     $index++;
-}echo json_encode($dataArray);
+foreach($ingredientsArray as $queryIngredient){
+    $mysql_qry = "SELECT * FROM recipe_data WHERE ingredient LIKE '%$queryIngredient%'";
+    $dataArray = array();
+    $result = mysqli_query($conn, $mysql_qry);
+    $index = 0;
+    while($row = mysqli_fetch_assoc($result)){ // loop to store the data in an associative array.
+         $dataArray[$index] = $row;
+         $index++;
+    }
+}
+ print_r($dataArray);
+
+
+
+//echo json_encode($dataArray);
 
 
 
