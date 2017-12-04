@@ -1,28 +1,24 @@
 <?php
 require "conn.php";
 
-$ingredient = "Bananas,Apple,Grapes";//$_POST["ingredient"];
+$ingredient = $_POST["ingredient"];
 
 $ingredientsArray = explode(',',$ingredient);
 
-print_r($ingredientsArray);
+$dataArray = array();
+
 
 foreach($ingredientsArray as $queryIngredient){
     $mysql_qry = "SELECT * FROM recipe_data WHERE ingredient LIKE '%$queryIngredient%'";
-    $dataArray = array();
     $result = mysqli_query($conn, $mysql_qry);
-    $index = 0;
+    
     while($row = mysqli_fetch_assoc($result)){ // loop to store the data in an associative array.
-         $dataArray[$index] = $row;
-         $index++;
+         $dataArray[] = $row;
     }
 }
- print_r($dataArray);
+
+$dataArray = array_map("unserialize", array_unique(array_map("serialize", $dataArray)));//Used to remove the duplicate fields from the array.
 
 
-
-//echo json_encode($dataArray);
-
-
-
+echo json_encode($dataArray);
 ?>
