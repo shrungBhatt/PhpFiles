@@ -9,6 +9,9 @@ $dataArray = array();
 
 
 foreach($ingredientsArray as $queryIngredient){
+    if($queryIngredient == ","){
+        return;
+    }
     $mysql_qry = "SELECT * FROM recipe_data WHERE ingredient LIKE '%$queryIngredient%'";
     $result = mysqli_query($conn, $mysql_qry);
     
