@@ -1,10 +1,10 @@
 <?php
 require "conn.php";
 
-$user_name = $_POST["username"];
-$user_pass = $_POST["password"];
+$user_name = mysql_real_escape_string($_POST["username"]); //funcion used to add slash before any wild card characters.
+$user_pass = mysql_real_escape_string($_POST["password"]);
 
-$mysql_qry = "SELECT * FROM student_data WHERE username='$user_name' AND password='$user_pass';";
+$mysql_qry = "SELECT * FROM student_data WHERE username='$user_name' AND password='$user_pass'";
 
 $result = mysqli_query($conn, $mysql_qry);
 
