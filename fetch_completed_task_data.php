@@ -9,5 +9,8 @@ $index = 0;
 while($row = mysqli_fetch_assoc($result)){ // loop to store the data in an associative array.
      $dataArray[$index] = $row;
      $index++;
-}echo json_encode($dataArray);
+}
+$finalArray = array("List" => $dataArray);
+
+echo json_encode($finalArray);
 ?>
